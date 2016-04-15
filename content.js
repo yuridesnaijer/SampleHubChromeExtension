@@ -5,21 +5,24 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 
-//alert("YO chrome extension");
 window.onload = function(){
-    console.log(window.location.href);
 
-    console.log($("#eow-title"));
+    //create script element.
+
+
 
     const container = document.getElementById('watch8-secondary-actions');
-    console.log(container);
     const button = createButton();
     container.appendChild(button);
 
+    var ytplayer = document.getElementById("movie_player");
+
     button.addEventListener('click', function(e) {
         e.preventDefault();
-        //add();
-        getvideoTime();
+        var script = document.createElement('script');
+        script.innerHTML = 'var ytplayer = document.getElementById("movie_player");console.log(ytplayer.getCurrentTime());';
+        document.body.appendChild(script);
+
     });
 };
 
@@ -43,6 +46,5 @@ function getVideoTitle() {
 }
 
 function getvideoTime() {
-    //TODO: get start and end time of video
-    console.log(yt);
+    console.log(window.ytplayer.getCurrentTime());
 }
