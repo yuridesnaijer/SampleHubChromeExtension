@@ -9,7 +9,9 @@ window.onload = function(){
 
     const container = document.getElementById('watch8-secondary-actions');
     const button = createButton();
+    const start = createSampleStart();
     container.appendChild(button);
+    container.appendChild(start);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -19,6 +21,13 @@ window.onload = function(){
 
     });
 };
+
+function createSampleStart() {
+    var start = document.createElement('div');
+    start.setAttribute('id', 'sampleStart');
+    start.innerHTML = '0:00';
+    return start;
+}
 
 function createButton() {
     var button = document.createElement('a');
@@ -47,7 +56,7 @@ function getvideoTime() {
     //create script element.
     var script = document.createElement('script');
     script.setAttribute('id', 'sampleHack');
-    script.innerHTML = 'var ytplayer = document.getElementById("movie_player");console.log(ytplayer.getCurrentTime());';
+    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var start = document.getElementById("sampleStart"); start.innerHTML = ytplayer.getCurrentTime();';
     //execute script
     document.body.appendChild(script);
 }
