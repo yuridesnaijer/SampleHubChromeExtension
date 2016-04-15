@@ -7,21 +7,15 @@
 
 window.onload = function(){
 
-    //create script element.
-
-
-
     const container = document.getElementById('watch8-secondary-actions');
     const button = createButton();
     container.appendChild(button);
 
-    var ytplayer = document.getElementById("movie_player");
-
     button.addEventListener('click', function(e) {
         e.preventDefault();
-        var script = document.createElement('script');
-        script.innerHTML = 'var ytplayer = document.getElementById("movie_player");console.log(ytplayer.getCurrentTime());';
-        document.body.appendChild(script);
+
+        getvideoTime();
+
 
     });
 };
@@ -46,5 +40,14 @@ function getVideoTitle() {
 }
 
 function getvideoTime() {
-    console.log(window.ytplayer.getCurrentTime());
+    var sampleHack = document.getElementById('sampleHack');
+    if (sampleHack) {
+        sampleHack.remove();
+    }
+    //create script element.
+    var script = document.createElement('script');
+    script.setAttribute('id', 'sampleHack');
+    script.innerHTML = 'var ytplayer = document.getElementById("movie_player");console.log(ytplayer.getCurrentTime());';
+    //execute script
+    document.body.appendChild(script);
 }
