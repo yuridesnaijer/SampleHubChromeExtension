@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Hello World",
+  "version": "2.1",
+  "minimum_chrome_version": "23",
+  "icons": {
+    "16": "icon_16.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+      {
+        "matches": ["https://*/*", "http://*/*"],
+        "js": ["jquery.js", "content.js"],
+        "run_at": "document_end",
+        "css": ["styles/main.css"]
+      }
+    ],
+   "permissions":[
+        "contextMenus", 
+        "tabs",
+        "http://youtube.com/watch",
+        "https://youtube.com/watch"
+        ]
+}
