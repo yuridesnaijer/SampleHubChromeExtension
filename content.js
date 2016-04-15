@@ -4,9 +4,11 @@
  * @see http://developer.chrome.com/apps/app.runtime.html
  * @see http://developer.chrome.com/apps/app.window.html
  */
+window.beforeUnload = function() {
+    console.log('yoo');
+};
 
 window.onload = function(){
-
     const container = document.getElementById('watch8-secondary-actions');
     const button = createButton('sampleHub-dl', 'add sample');
     const startButton = createButton('sampleStart', 'sample start');
