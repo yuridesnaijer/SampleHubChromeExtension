@@ -10,11 +10,16 @@ window.onload = function(){
     const container = document.getElementById('watch8-secondary-actions');
     const button = createButton('sampleHub-dl', 'add sample');
     const startButton = createButton('sampleStart', 'sample start');
+    const endButton = createButton('sampleEnd', 'sample end');
 
     const startContainer = createSampleStartContainer();
+    const endContainer = createSampleEndContainer();
     container.appendChild(button);
     container.appendChild(startButton);
+    container.appendChild(endButton);
+
     container.appendChild(startContainer);
+    container.appendChild(endContainer);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -25,6 +30,11 @@ window.onload = function(){
         e.preventDefault();
         getvideoTime();
     });
+
+    endButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        getvideoEndTime();
+    });
 };
 
 function createSampleStartContainer() {
@@ -32,6 +42,12 @@ function createSampleStartContainer() {
     start.setAttribute('id', 'sampleStart');
     start.innerHTML = '0:00';
     return start;
+}
+function createSampleEndContainer() {
+    var end = document.createElement('div');
+    end.setAttribute('id', 'sampleEnd');
+    end.innerHTML = '0:00';
+    return end;
 }
 
 function createButton(className, text) {
@@ -54,6 +70,7 @@ function getVideoTitle() {
 }
 
 function getvideoTime() {
+    // Check if a script tag is already made, if so delete it and make a new one.
     var sampleHack = document.getElementById('sampleHack');
     if (sampleHack) {
         sampleHack.remove();
@@ -64,4 +81,20 @@ function getvideoTime() {
     script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var start = document.getElementById("sampleStart"); start.innerHTML = ytplayer.getCurrentTime();';
     //execute script
     document.body.appendChild(script);
+
+}
+
+function getvideoEndTime() {
+    // Check if a script tag is already made, if so delete it and make a new one.
+    var sampleHack = document.getElementById('sampleHack');
+    if (sampleHack) {
+        sampleHack.remove();
+    }
+    //create script element.
+    var script = document.createElement('script');
+    script.setAttribute('id', 'sampleHack');
+    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var end = document.getElementById("sampleEnd"); end.innerHTML = ytplayer.getCurrentTime();';
+    //execute script
+    document.body.appendChild(script);
+
 }
