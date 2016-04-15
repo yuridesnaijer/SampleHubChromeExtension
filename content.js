@@ -8,31 +8,36 @@
 window.onload = function(){
 
     const container = document.getElementById('watch8-secondary-actions');
-    const button = createButton();
-    const start = createSampleStart();
+    const button = createButton('sampleHub-dl', 'add sample');
+    const startButton = createButton('sampleStart', 'sample start');
+
+    const startContainer = createSampleStartContainer();
     container.appendChild(button);
-    container.appendChild(start);
+    container.appendChild(startButton);
+    container.appendChild(startContainer);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
+        //TODO: send ajax call here
+    });
 
+    startButton.addEventListener('click', function(e) {
+        e.preventDefault();
         getvideoTime();
-
-
     });
 };
 
-function createSampleStart() {
+function createSampleStartContainer() {
     var start = document.createElement('div');
     start.setAttribute('id', 'sampleStart');
     start.innerHTML = '0:00';
     return start;
 }
 
-function createButton() {
+function createButton(className, text) {
     var button = document.createElement('a');
-    button.className = 'sampleHub-dl';
-    button.innerHTML = 'add';
+    button.className = className;
+    button.innerHTML = text;
     return button;
 }
 
