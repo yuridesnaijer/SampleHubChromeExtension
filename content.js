@@ -25,7 +25,7 @@ window.onload = function(){
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
-        //TODO: send ajax call here
+        add();
     });
 
     startButton.addEventListener('click', function(e) {
