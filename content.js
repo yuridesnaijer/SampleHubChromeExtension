@@ -8,24 +8,25 @@
 window.onhashchange = onUrlChange;
 
 window.onload = function(){
-
     setInterval(onUrlChange, 1000);
-
 };
 
 function appendElements() {
-    const container = document.getElementById('watch8-secondary-actions');
-    const button = createButton('sampleHub-dl', 'add sample');
-    const startButton = createButton('sampleStart', 'sample start');
-    const endButton = createButton('sampleEnd', 'sample end');
+    const container = document.getElementById('watch-header');
+    const buttonBox = document.createElement('div');
+    buttonBox.setAttribute('class', 'sampleHubContainer');
+    const button = createButton('sampleHub-dl', 'Add Sample', 'https://i.imgur.com/0Z0TFwD.png');
+    const startButton = createButton('sampleStart', '', 'https://i.imgur.com/DcEdg1k.png');
+    const endButton = createButton('sampleEnd', '', 'https://i.imgur.com/zeYwVqx.png');
     const startContainer = createSampleStartContainer();
     const endContainer = createSampleEndContainer();
 
-    container.appendChild(button);
-    container.appendChild(startButton);
-    container.appendChild(endButton);
-    container.appendChild(startContainer);
-    container.appendChild(endContainer);
+    buttonBox.appendChild(button);
+    buttonBox.appendChild(startButton);
+    buttonBox.appendChild(endButton);
+    buttonBox.appendChild(startContainer);
+    buttonBox.appendChild(endContainer);
+    container.appendChild(buttonBox);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -69,10 +70,15 @@ function createSampleEndContainer() {
     return end;
 }
 
-function createButton(className, text) {
+function createButton(className, text, iconSrc) {
     var button = document.createElement('a');
     button.className = className;
-    button.innerHTML = text;
+
+
+    var icon = "<img src='"+iconSrc+"'/>";
+    //icon.setAttribute('src', 'https://i.imgur.com/tgzJ4lc.png');
+    //button.appendChild(icon);
+    button.innerHTML = icon + text;
     return button;
 }
 
@@ -92,7 +98,7 @@ function add() {
     xhr.onreadystatechange = function() {
         console.log("DONE");
         if (xhr.readyState == 4) {
-            // WARNING! Might be injecting a malicious script!
+            //TODO: give user feedback that sample was added
             console.log("SUCCESS");
         }
     };
