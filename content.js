@@ -5,8 +5,6 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 
-//window.onhashchange = onUrlChange;
-
 window.onload = function(){
     setInterval(onUrlChange, 100);
 };
@@ -46,21 +44,6 @@ function onUrlChange() {
     if (!sampleHubContainer) {
         appendElements();
     }
-}
-
-function createSampleStartContainer() {
-    var start = document.createElement('div');
-    start.setAttribute('id', 'sampleStart');
-    start.innerHTML = '0:00';
-    start.style.visibility = 'hidden';
-    return start;
-}
-function createSampleEndContainer() {
-    var end = document.createElement('div');
-    end.setAttribute('id', 'sampleEnd');
-    end.innerHTML = '0:00';
-    end.style.visibility = 'hidden';
-    return end;
 }
 
 function createButton(className, text, iconSrc) {
