@@ -58,12 +58,14 @@ function createSampleStartContainer() {
     var start = document.createElement('div');
     start.setAttribute('id', 'sampleStart');
     start.innerHTML = '0:00';
+    start.style.visibility = 'hidden';
     return start;
 }
 function createSampleEndContainer() {
     var end = document.createElement('div');
     end.setAttribute('id', 'sampleEnd');
     end.innerHTML = '0:00';
+    end.style.visibility = 'hidden';
     return end;
 }
 
@@ -82,9 +84,11 @@ function add() {
     const name = "name="+stripped_title+".mp3";
     const youtubeUrl = "youtube_url="+window.location.href;
     const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addSample";
+    const startTime = "start="+document.getElementById('sampleStart').innerHTML;
+    const endTime = "end="+document.getElementById('sampleEnd').innerHTML;
 
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", endPoint+"?"+name+"&"+youtubeUrl, true);
+    xhr.open("GET", endPoint+"?"+name+"&"+startTime+"&"+endTime+"&"+youtubeUrl, true);
     xhr.onreadystatechange = function() {
         console.log("DONE");
         if (xhr.readyState == 4) {
