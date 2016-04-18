@@ -25,7 +25,7 @@ window.onload = function(){
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
-        //TODO: send ajax call here
+        add();
     });
 
     startButton.addEventListener('click', function(e) {
@@ -60,11 +60,20 @@ function createButton(className, text) {
 }
 
 function add() {
-    const name = "name="+getVideoTitle()+".mp3";
-    const youtubeUrl = "youtube_url"+window.location.href;
-    const endPoint = "https://localhost:8888/sampleHub/sampleHub/public/api/v1/addSample";
+    const name = "name="+getVideoTitle().replace(/\s/g, '').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')+".mp3";
+    const youtubeUrl = "youtube_url="+window.location.href;
+    const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addSample";
 
-    $.get(endPoint+name+youtubeUrl);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", endPoint+"?"+name+"&"+youtubeUrl, true);
+    xhr.onreadystatechange = function() {
+        console.log("DONE");
+        if (xhr.readyState == 4) {
+            // WARNING! Might be injecting a malicious script!
+            console.log("SUCCESS");
+        }
+    }
+    xhr.send();
 }
 
 function getVideoTitle() {
