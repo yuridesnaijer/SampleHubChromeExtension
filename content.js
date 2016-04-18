@@ -6,7 +6,7 @@
  */
 
 window.onload = function(){
-    setInterval(onUrlChange, 100);
+    setInterval(onUrlChange, 1000);
 };
 
 function appendElements() {
