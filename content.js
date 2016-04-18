@@ -60,9 +60,13 @@ function createButton(className, text) {
 }
 
 function add() {
-    const name = "name="+getVideoTitle().replace(/\s/g, '').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')+".mp3";
+
+    var title = getVideoTitle();
+    title.replace(/[^a-z0-9]/gi,'');
+
+    const name = "name="+title+".mp3";
     const youtubeUrl = "youtube_url="+window.location.href;
-    const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addSample";
+    const endPoint = "https://localhost/sparetime/sampleHub/public/api/v1/addSample";
 
     var xhr = new XMLHttpRequest();
     xhr.open("GET", endPoint+"?"+name+"&"+youtubeUrl, true);
@@ -72,7 +76,7 @@ function add() {
             // WARNING! Might be injecting a malicious script!
             console.log("SUCCESS");
         }
-    }
+    };
     xhr.send();
 }
 
