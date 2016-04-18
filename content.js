@@ -5,10 +5,10 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 
-window.onhashchange = onUrlChange;
+//window.onhashchange = onUrlChange;
 
 window.onload = function(){
-    setInterval(onUrlChange, 1000);
+    setInterval(onUrlChange, 100);
 };
 
 function appendElements() {
@@ -41,14 +41,10 @@ function appendElements() {
     });
 }
 
-url = '';
-
 function onUrlChange() {
-    if(url != window.location.href) {
-
+    var sampleHubContainer = document.getElementsByClassName('sampleHubContainer')[0];
+    if (!sampleHubContainer) {
         appendElements();
-        url = window.location.href;
-
     }
 }
 
