@@ -77,11 +77,11 @@ function createButton(className, text) {
 function add() {
 
     var title = getVideoTitle();
-    title.replace(/[^a-z0-9]/gi,'');
+    var stripped_title = title.replace(/[^a-z0-9]/gi,'');
 
-    const name = "name="+title+".mp3";
+    const name = "name="+stripped_title+".mp3";
     const youtubeUrl = "youtube_url="+window.location.href;
-    const endPoint = "https://localhost/sparetime/sampleHub/public/api/v1/addSample";
+    const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addSample";
 
     var xhr = new XMLHttpRequest();
     xhr.open("GET", endPoint+"?"+name+"&"+youtubeUrl, true);
