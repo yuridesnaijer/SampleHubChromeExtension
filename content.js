@@ -4,22 +4,26 @@
  * @see http://developer.chrome.com/apps/app.runtime.html
  * @see http://developer.chrome.com/apps/app.window.html
  */
-window.beforeUnload = function() {
-    console.log('yoo');
-};
+
+window.onhashchange = onUrlChange;
 
 window.onload = function(){
+
+    setInterval(onUrlChange, 1000);
+
+};
+
+function appendElements() {
     const container = document.getElementById('watch8-secondary-actions');
     const button = createButton('sampleHub-dl', 'add sample');
     const startButton = createButton('sampleStart', 'sample start');
     const endButton = createButton('sampleEnd', 'sample end');
-
     const startContainer = createSampleStartContainer();
     const endContainer = createSampleEndContainer();
+
     container.appendChild(button);
     container.appendChild(startButton);
     container.appendChild(endButton);
-
     container.appendChild(startContainer);
     container.appendChild(endContainer);
 
@@ -37,7 +41,18 @@ window.onload = function(){
         e.preventDefault();
         getvideoEndTime();
     });
-};
+}
+
+url = '';
+
+function onUrlChange() {
+    if(url != window.location.href) {
+
+        appendElements();
+        url = window.location.href;
+
+    }
+}
 
 function createSampleStartContainer() {
     var start = document.createElement('div');
