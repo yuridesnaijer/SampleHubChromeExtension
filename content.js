@@ -16,16 +16,13 @@ function appendElements() {
     const buttonBox = document.createElement('div');
     buttonBox.setAttribute('class', 'sampleHubContainer');
     const button = createButton('sampleHub-dl', 'Add Sample', 'https://i.imgur.com/0Z0TFwD.png');
-    const startButton = createButton('sampleStart', '', 'https://i.imgur.com/DcEdg1k.png');
-    const endButton = createButton('sampleEnd', '', 'https://i.imgur.com/zeYwVqx.png');
-    const startContainer = createSampleStartContainer();
-    const endContainer = createSampleEndContainer();
+
+    const startButton = createButton('sampleStart', '<div id="sampleStart">0:00</div>', 'https://i.imgur.com/DcEdg1k.png');
+    const endButton = createButton('sampleEnd', '<div id="sampleEnd">0:00</div>', 'https://i.imgur.com/zeYwVqx.png');
 
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
     buttonBox.appendChild(endButton);
-    buttonBox.appendChild(startContainer);
-    buttonBox.appendChild(endContainer);
     container.appendChild(buttonBox);
 
     button.addEventListener('click', function(e) {
@@ -76,8 +73,6 @@ function createButton(className, text, iconSrc) {
 
 
     var icon = "<img src='"+iconSrc+"'/>";
-    //icon.setAttribute('src', 'https://i.imgur.com/tgzJ4lc.png');
-    //button.appendChild(icon);
     button.innerHTML = icon + text;
     return button;
 }
@@ -118,7 +113,7 @@ function getvideoTime() {
     //create script element.
     var script = document.createElement('script');
     script.setAttribute('id', 'sampleHack');
-    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var start = document.getElementById("sampleStart"); start.innerHTML = ytplayer.getCurrentTime();';
+    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var start = document.getElementById("sampleStart"); start.innerHTML = Math.round(ytplayer.getCurrentTime());';
     //execute script
     document.body.appendChild(script);
 
@@ -133,7 +128,7 @@ function getvideoEndTime() {
     //create script element.
     var script = document.createElement('script');
     script.setAttribute('id', 'sampleHack');
-    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var end = document.getElementById("sampleEnd"); end.innerHTML = ytplayer.getCurrentTime();';
+    script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var end = document.getElementById("sampleEnd"); end.innerHTML = Math.round(ytplayer.getCurrentTime());';
     //execute script
     document.body.appendChild(script);
 

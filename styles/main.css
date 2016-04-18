@@ -34,3 +34,7 @@
 #watch-header{
   height: 235px;
 }
+
+#sampleStart, #sampleEnd{
+  display: inline;
+}
