@@ -16,14 +16,17 @@ window.onload = function(){
     setInterval(onUrlChange, 1000);
 };
 
+var container;
+var selectBox;
+
 function appendElements() {
-    const container = document.getElementById('watch-header');
+    container = document.getElementById('watch-header');
     const buttonBox = document.createElement('div');
     buttonBox.setAttribute('class', 'sampleHubContainer');
     const button = createButton('sampleHub-dl', 'Add Sample', 'https://i.imgur.com/0Z0TFwD.png');
     const startButton = createButton('sampleStart', '<div id="sampleStart">0:00</div>', 'https://i.imgur.com/DcEdg1k.png');
     const endButton = createButton('sampleEnd', '<div id="sampleEnd">0:00</div>', 'https://i.imgur.com/zeYwVqx.png');
-    const selectBox = document.createElement('select');
+    selectBox = document.createElement('select');
 
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
@@ -50,6 +53,8 @@ function appendElements() {
 }
 
 function setProjectChooser(){
+    console.log(o);
+
     for(var i = 0; i < o.length; i++) {
         var option = document.createElement('option');
         option.innerHTML = o[i].name;
@@ -140,10 +145,12 @@ function getProjects(){
     xhr.onreadystatechange = function(data) {
         console.log("DONE");
         if (xhr.readyState == 4) {
-            console.log(xhr.responseText);
+            o = JSON.parse(xhr.responseText);
 
             //TODO: give user feedback that sample was added
             console.log("SUCCESS");
+
+            setProjectChooser();
         }
     };
     xhr.send();

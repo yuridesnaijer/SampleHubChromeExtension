@@ -19,6 +19,7 @@
         "contextMenus", 
         "tabs",
         "http://youtube.com/watch",
-        "https://youtube.com/watch"
+        "https://youtube.com/watch",
+        "http://localhost/sparetime/sampleHub/public/api/v1/projects"
         ]
 }
