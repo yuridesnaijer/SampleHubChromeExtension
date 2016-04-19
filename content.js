@@ -25,15 +25,6 @@ function appendElements() {
     const endButton = createButton('sampleEnd', '<div id="sampleEnd">0:00</div>', 'https://i.imgur.com/zeYwVqx.png');
     const selectBox = document.createElement('select');
 
-    for(var i = 0; i < o.length; i++) {
-        var option = document.createElement('option');
-        option.innerHTML = o[i].name;
-        option.setAttribute('id', o[i].id);
-
-        selectBox.appendChild(option);
-    }
-
-
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
     buttonBox.appendChild(endButton);
@@ -54,6 +45,18 @@ function appendElements() {
         e.preventDefault();
         getvideoEndTime();
     });
+
+    getProjects();
+}
+
+function setProjectChooser(){
+    for(var i = 0; i < o.length; i++) {
+        var option = document.createElement('option');
+        option.innerHTML = o[i].name;
+        option.setAttribute('id', o[i].id);
+
+        selectBox.appendChild(option);
+    }
 }
 
 function onUrlChange() {
@@ -127,5 +130,21 @@ function getvideoEndTime() {
     script.innerHTML = 'var ytplayer = document.getElementById("movie_player"); var end = document.getElementById("sampleEnd"); end.innerHTML = Math.round(ytplayer.getCurrentTime());';
     //execute script
     document.body.appendChild(script);
+}
 
+function getProjects(){
+    const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/projects";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", endPoint, true);
+    xhr.onreadystatechange = function(data) {
+        console.log("DONE");
+        if (xhr.readyState == 4) {
+            console.log(xhr.responseText);
+
+            //TODO: give user feedback that sample was added
+            console.log("SUCCESS");
+        }
+    };
+    xhr.send();
 }
