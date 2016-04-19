@@ -27,19 +27,16 @@ function appendElements() {
 
     for(var i = 0; i < o.length; i++) {
         var option = document.createElement('option');
-        //console.log(o[i].name);
         option.innerHTML = o[i].name;
         option.setAttribute('id', o[i].id);
 
         selectBox.appendChild(option);
     }
 
-    //console.log(selectBox);
 
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
     buttonBox.appendChild(endButton);
-    //TODO create selectbox
     container.appendChild(buttonBox);
     container.appendChild(selectBox);
 
