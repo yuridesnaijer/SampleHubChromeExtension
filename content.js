@@ -27,6 +27,7 @@ function appendElements() {
     const startButton = createButton('sampleStart', '<div id="sampleStart">0:00</div>', 'https://i.imgur.com/DcEdg1k.png');
     const endButton = createButton('sampleEnd', '<div id="sampleEnd">0:00</div>', 'https://i.imgur.com/zeYwVqx.png');
     selectBox = document.createElement('select');
+    selectBox.setAttribute('id', 'SampleHubProjectSelect');
 
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
@@ -50,15 +51,14 @@ function appendElements() {
     });
 
     getProjects();
+    setProjectChooser();
 }
 
 function setProjectChooser(){
-    console.log(o);
-
     for(var i = 0; i < o.length; i++) {
         var option = document.createElement('option');
         option.innerHTML = o[i].name;
-        option.setAttribute('id', o[i].id);
+        option.setAttribute('value', o[i].id);
 
         selectBox.appendChild(option);
     }
@@ -91,9 +91,11 @@ function add() {
     const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addSample";
     const startTime = "start="+document.getElementById('sampleStart').innerHTML;
     const endTime = "end="+document.getElementById('sampleEnd').innerHTML;
+    var e = document.getElementById("SampleHubProjectSelect");
+    const projectParam = "projectId="+e.options[e.selectedIndex].value;
 
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", endPoint+"?"+name+"&"+startTime+"&"+endTime+"&"+youtubeUrl, true);
+    xhr.open("GET", endPoint+"?"+name+"&"+startTime+"&"+endTime+"&"+youtubeUrl+"&"+projectParam, true);
     xhr.onreadystatechange = function() {
         console.log("DONE");
         if (xhr.readyState == 4) {
