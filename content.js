@@ -4,6 +4,13 @@
  * @see http://developer.chrome.com/apps/app.runtime.html
  * @see http://developer.chrome.com/apps/app.window.html
  */
+var o = [{
+    name: 'name',
+    id: 1
+},{
+    name: 'name2',
+    id: 2
+}];
 
 window.onload = function(){
     setInterval(onUrlChange, 1000);
@@ -14,14 +21,27 @@ function appendElements() {
     const buttonBox = document.createElement('div');
     buttonBox.setAttribute('class', 'sampleHubContainer');
     const button = createButton('sampleHub-dl', 'Add Sample', 'https://i.imgur.com/0Z0TFwD.png');
-
     const startButton = createButton('sampleStart', '<div id="sampleStart">0:00</div>', 'https://i.imgur.com/DcEdg1k.png');
     const endButton = createButton('sampleEnd', '<div id="sampleEnd">0:00</div>', 'https://i.imgur.com/zeYwVqx.png');
+    const selectBox = document.createElement('select');
+
+    for(var i = 0; i < o.length; i++) {
+        var option = document.createElement('option');
+        //console.log(o[i].name);
+        option.innerHTML = o[i].name;
+        option.setAttribute('id', o[i].id);
+
+        selectBox.appendChild(option);
+    }
+
+    //console.log(selectBox);
 
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
     buttonBox.appendChild(endButton);
+    //TODO create selectbox
     container.appendChild(buttonBox);
+    container.appendChild(selectBox);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
