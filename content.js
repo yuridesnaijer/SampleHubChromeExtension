@@ -29,11 +29,16 @@ function appendElements() {
     selectBox = document.createElement('select');
     selectBox.setAttribute('id', 'SampleHubProjectSelect');
 
+    const projectAddbutton = createButton('addProject', 'Add Project', 'https://i.imgur.com/0Z0TFwD.png');
+
     buttonBox.appendChild(button);
     buttonBox.appendChild(startButton);
     buttonBox.appendChild(endButton);
     container.appendChild(buttonBox);
     container.appendChild(selectBox);
+
+    $(buttonBox).append("<input id='add_project_input' type='text'/>");
+    buttonBox.appendChild(projectAddbutton);
 
     button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -50,8 +55,30 @@ function appendElements() {
         getvideoEndTime();
     });
 
+    projectAddbutton.addEventListener('click', function (e) {
+        saveProject();
+    });
+
     getProjects();
-    setProjectChooser();
+}
+
+function saveProject() {
+    const endPoint = "http://localhost/sparetime/sampleHub/public/api/v1/addProject";
+    const projectParam = "project_name="+$("#add_project_input").val();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", endPoint+"?"+projectParam, true);
+    xhr.onreadystatechange = function() {
+        console.log("DONE");
+        if (xhr.readyState == 4) {
+            //TODO: give user feedback that sample was added
+            console.log("PROJECT ADDED !!!");
+
+            getProjects();
+        }
+    };
+    xhr.send();
+
 }
 
 function setProjectChooser(){
@@ -82,7 +109,6 @@ function createButton(className, text, iconSrc) {
 }
 
 function add() {
-
     var title = getVideoTitle();
     var stripped_title = title.replace(/[^a-z0-9]/gi,'');
 
@@ -151,6 +177,8 @@ function getProjects(){
 
             //TODO: give user feedback that sample was added
             console.log("SUCCESS");
+
+            $("#SampleHubProjectSelect").children().remove();
 
             setProjectChooser();
         }
