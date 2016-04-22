@@ -127,6 +127,7 @@ function add() {
         if (xhr.readyState == 4) {
             //TODO: give user feedback that sample was added
             console.log("SUCCESS");
+            alert("sample has been added successfully to "+e.options[e.selectedIndex].text);
         }
     };
     xhr.send();
